@@ -1,0 +1,62 @@
+{
+  "repo": "https://github.com/itsivag/suprclaw-marketplace.git",
+  "agents": [
+    {
+      "id": "seo",
+      "name": "SEO Specialist",
+      "description": "Increase organic visibility, traffic quality, and search-driven conversions through structured research, optimization, and measurable strategy.",
+      "session_key": "agent:seo:main",
+      "is_lead": false,
+      "capabilities": [
+        "Browse SEO keywords",
+        "Benchmark sites",
+        "Score site",
+        "Create SEO content",
+        "Optimize meta tags",
+        "Generate schema markup",
+        "Run technical SEO checks",
+        "Use connector-backed app tools"
+      ],
+      "best_with": [
+        "content-writer",
+        "social-media-manager",
+        "web-developer",
+        "data-analyst"
+      ],
+      "source_path": "marketplace/seo/skills/technical-seo-checker",
+      "extra_skill_paths": [
+        "marketplace/global/skills/suprclaw-github-connector",
+        "marketplace/global/skills/suprclaw-connector-tool-wrapper"
+      ],
+      "install_path": ".picoclaw/workspace-seo"
+    },
+    {
+      "id": "content-writer",
+      "name": "Content Writer",
+      "description": "Produce high-conversion, search-aligned, authority-building content that matches user intent, reinforces topical depth, and drives measurable business outcomes.",
+      "session_key": "agent:content-writer:main",
+      "is_lead": false,
+      "capabilities": [
+        "Write SEO blog posts",
+        "Write landing page copy",
+        "Analyze content gaps",
+        "Optimize for AI citation",
+        "Write UX and marketing copy",
+        "Build topic clusters",
+        "Refresh existing content"
+      ],
+      "best_with": [
+        "seo",
+        "social-media-manager",
+        "web-developer",
+        "data-analyst"
+      ],
+      "source_path": "marketplace/content/skills/seo-content-writer",
+      "extra_skill_paths": [
+        "marketplace/global/skills/suprclaw-github-connector",
+        "marketplace/global/skills/suprclaw-connector-tool-wrapper"
+      ],
+      "install_path": ".picoclaw/workspace-content"
+    }
+  ]
+}
