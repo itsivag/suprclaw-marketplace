@@ -1,258 +1,70 @@
 # HEARTBEAT.md — Worker Execution Protocol
 
+SPECIALIST_PROFILE:seo
+COORDINATION_PROTOCOL:V1
+
 Run in order. Every heartbeat.
-DB state = truth. Never rely on memory.
+Typed Supabase MCP state is the source of truth.
+Follow `skills/suprclaw-supabase/SKILL.md` (`TASK_DB_CONTRACT_V3`) for the canonical typed tool contract.
 
 ---
 
 ## Pre-Flight
 
-* Resolve `agent_id` (if not cached)
-* Capture timestamp + cycle number (for idempotency keys)
+- Capture timestamp and cycle number for idempotency keys
 
 ---
 
-## 1 — Check Notifications
+## 1 — Notifications
 
-```
-select * from agent_get_my_notifications('<agent_id>');
-select agent_ack_notifications('<agent_id>');
-```
+1. Call `mcp_supabase_get_notifications(caller_id=<supabase_uuid>)`
+2. Call `mcp_supabase_ack_notifications(caller_id=<supabase_uuid>)`
+3. For any referenced task, call `mcp_supabase_get_task_context(caller_id=<supabase_uuid>, task_id=<task_uuid>)`
 
-Notifications signal where to look — not what to do.
-
-If a fresh inbound message is exactly:
-`Task <task_uuid> has been assigned to you`
-or the message starts with `TASK_ASSIGNMENT:`,
-then run this fast path immediately before normal queue scanning:
-
-1. `select agent_get_task_context('<task_uuid>');`
-2. `select agent_transition_task('<task_uuid>', 'assigned', 'in_progress', '<agent_id>', 'picked up from webhook');`
-3. `select agent_post_message('<task_uuid>', '<agent_id>', 'Picked up task and started execution.', 'msg:<agent_id>:<task_uuid>:<YYYYMMDD>:<cycle_n>');`
-4. `select agent_log_action('<agent_id>', '<task_uuid>', 'task_started', '{"source":"webhook"}', 'act:<agent_id>:task_started:<task_uuid>:<YYYYMMDD>:<cycle_n>');`
-5. Continue work and move to `review` when complete (or `blocked` with a specific blocker).
-
-If required context is still missing after `agent_get_task_context`, request lead input immediately.
-Do not treat missing local memory files as task-context failure.
-
-```
-select agent_post_message(
-  '<task_uuid>',
-  '<agent_id>',
-  'NEEDS_INPUT_FOR_LEAD: missing=<fields>; attempted=<what_you_tried>; question=<exact_question>; unblock_condition=<what_you_need>',
-  'msg:<agent_id>:needs_input:<task_uuid>:<YYYYMMDD>:<cycle_n>'
-);
-select agent_log_action(
-  '<agent_id>',
-  '<task_uuid>',
-  'task_blocked',
-  '{"reason":"needs_input_from_lead"}',
-  'act:<agent_id>:task_blocked:<task_uuid>:<YYYYMMDD>:<cycle_n>'
-);
-select agent_transition_task('<task_uuid>', 'in_progress', 'blocked', '<agent_id>', 'needs input from lead');
-```
-
-This fast path is mandatory.
-Do not replace it with raw `UPDATE tasks ...` statements.
+Notifications tell you where to look. Task context tells you what to do.
 
 ---
 
-## 2 — Fetch Assigned Tasks
+## 2 — Queue
 
-```
-select * from agent_get_my_tasks('<agent_id>');
-```
-
-If none → go to Final Step.
+Call `mcp_supabase_get_tasks(caller_id=<supabase_uuid>)`.
 Only work on tasks assigned to you.
 
 ---
 
-## 3 — Process Each Task (Priority Order)
+## 3 — Process Each Task
 
-### 3a — Load Context
+For each assigned task:
 
-```
-select agent_get_task_context('<task_id>');
-```
-
-Read:
-
-* Task details
-* All messages
-* Recent actions
-
-Never skip context.
+1. Call `mcp_supabase_get_task_context(caller_id=<supabase_uuid>, task_id=<task_uuid>)`
+2. If the task is still `assigned`, call `mcp_supabase_start_task(caller_id=<supabase_uuid>, task_id=<task_uuid>)`
+3. Do one meaningful step of work
+4. Post progress with `mcp_supabase_post_message(caller_id=<supabase_uuid>, ...)`
+5. Log the step with `mcp_supabase_log_action(caller_id=<supabase_uuid>, ...)`
+6. Save output with `mcp_supabase_create_document(caller_id=<supabase_uuid>, ...)` when you produced a deliverable
+7. If complete, call `mcp_supabase_submit_task_for_review(caller_id=<supabase_uuid>, task_id=<task_uuid>)`
 
 ---
 
-### 3b — Duplicate Guard
+## 4 — Blockers
 
-Before acting:
+If you are genuinely blocked:
 
-* Did I already do this this cycle?
-* Is there already a log entry?
-* Is this finding already posted?
+1. Call `mcp_supabase_request_lead_input(caller_id=<supabase_uuid>, ...)`
+2. Call `mcp_supabase_log_action(caller_id=<supabase_uuid>, ...)` with `action=task_blocked`
+3. Call `mcp_supabase_block_task(caller_id=<supabase_uuid>, task_id=<task_uuid>, reason=<reason>)`
 
-If yes → skip.
-
----
-
-### 3c — Start Task (If Needed)
-
-If status = `assigned`:
-
-```
-select agent_transition_task('<task_id>', 'assigned', 'in_progress', '<agent_id>', null);
-```
-
-If false → re-check context.
+Never wait silently.
 
 ---
 
-### 3d — Do Real Work
+## 5 — Presence
 
-One meaningful step per cycle is fine.
-Depth > breadth. Concrete output > vague updates.
-
-Real work = tangible deliverable progress.
-“Thinking about it” ≠ work.
+- If you worked this cycle, call `mcp_supabase_set_agent_status(caller_id=<supabase_uuid>, status=active)`
+- If no work was required, call `mcp_supabase_set_agent_status(caller_id=<supabase_uuid>, status=idle)`
 
 ---
 
-### 3e — Post Progress
+## Final Step
 
-```
-select agent_post_message('<task_id>', '<agent_id>', '<summary>', '<idem_key>');
-```
-
-Message must be:
-
-* Specific
-* Self-contained
-* Honest
-
-Idem key:
-`msg:<agent_id>:<task_id>:<YYYYMMDD>:<cycle_n>`
-
----
-
-### 3f — Log Action
-
-```
-select agent_log_action('<agent_id>', '<task_id>', '<action_type>', '<meta_json>', '<idem_key>');
-```
-
-Common types:
-
-* `research_added`
-* `draft_created`
-* `analysis_completed`
-* `message_posted`
-* `review_requested`
-* `task_blocked`
-
-Idem key:
-`act:<agent_id>:<action_type>:<task_id>:<YYYYMMDD>:<cycle_n>`
-
----
-
-### 3g — Save Deliverable (If Created)
-
-```
-select agent_create_document('<task_id>', '<agent_id>', '<title>', '<content>');
-```
-
-Documents = output.
-Messages = commentary.
-
----
-
-### 3h — Request Review (If Complete)
-
-```
-select agent_transition_task('<task_id>', 'in_progress', 'review', '<agent_id>', 'deliverable complete');
-```
-
-Post summary message.
-You do not close tasks.
-
----
-
-### 3i — Block If Necessary
-
-If genuinely stuck:
-
-```
-select agent_transition_task('<task_id>', 'in_progress', 'blocked', '<agent_id>', 'reason');
-select agent_post_message('<task_id>', '<agent_id>', 'Blocked: [specific reason + need]', '<idem_key>');
-```
-
-Be specific.
-If blocker is missing requirements, the message must start with `NEEDS_INPUT_FOR_LEAD:`.
-
----
-
-## 4 — Update Presence
-
-```
-select agent_update_status('<agent_id>', 'active');  -- if worked
-select agent_update_status('<agent_id>', 'idle');    -- if no work
-```
-
----
-
-## 5 — Update Memory
-
-* Add key findings → `memory/YYYY-MM-DD.md`
-* Add durable lessons → `MEMORY.md`
-
----
-
-## Final Step — Output Decision
-
-Return `HEARTBEAT_OK` if:
-
-* No tasks
-* No notifications
-* No new progress this cycle
-
-Return brief summary only if real work was done.
-
-No filler.
-
----
-
-## Heartbeat State Tracking
-
-`memory/heartbeat-state.json`
-
-```json
-{
-  "lastChecks": {
-    "notifications": 0,
-    "tasks": 0,
-    "last_cycle": ""
-  },
-  "cycleCount": 0
-}
-```
-
-Increment `cycleCount` each heartbeat.
-Use it in idempotency keys.
-
----
-
-## Never During Heartbeat
-
-* Assign tasks
-* Move tasks to `done` or `cancelled`
-* Modify other agents
-* Run raw SQL
-* Guess schema columns/tables (forbidden guesses: `assigned_to`, `assignee_id`, `metadata`, `messages`)
-* Post duplicates
-* Use unstable idempotency keys
-
----
-
-Real work. Verified state. Deterministic writes.
+Return `HEARTBEAT_OK` only when there were no actionable notifications, no assigned tasks, and no new progress.
