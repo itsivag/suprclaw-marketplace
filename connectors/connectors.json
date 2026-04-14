@@ -5,6 +5,12 @@
       "display_name": "GitHub",
       "provider_config_key": "github",
       "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+    },
+    {
+      "provider": "gmail",
+      "display_name": "Gmail",
+      "provider_config_key": "gmail",
+      "icon_url": "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico"
     }
   ]
 }
