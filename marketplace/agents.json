@@ -57,6 +57,33 @@
         "marketplace/global/skills/suprclaw-connector-tool-wrapper"
       ],
       "install_path": ".picoclaw/workspace-content"
+    },
+    {
+      "id": "research",
+      "name": "Research Analyst",
+      "description": "Deliver fast, evidence-backed research with source-grounded insights, structured comparisons, and clear recommendations for decision-making.",
+      "session_key": "agent:research:main",
+      "is_lead": false,
+      "capabilities": [
+        "Run web research and source analysis",
+        "Summarize complex topics with citations",
+        "Compare tools, vendors, and approaches",
+        "Build decision briefs and tradeoff matrices",
+        "Extract key facts from long-form pages",
+        "Identify risks, assumptions, and unknowns"
+      ],
+      "best_with": [
+        "seo",
+        "content-writer",
+        "product-manager",
+        "founder"
+      ],
+      "source_path": "marketplace/global/skills/suprclaw-research",
+      "extra_skill_paths": [
+        "marketplace/global/skills/suprclaw-github-connector",
+        "marketplace/global/skills/suprclaw-connector-tool-wrapper"
+      ],
+      "install_path": ".picoclaw/workspace-research"
     }
   ]
 }
