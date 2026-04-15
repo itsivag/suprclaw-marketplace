@@ -9,7 +9,7 @@
     {
       "provider": "gmail",
       "display_name": "Gmail",
-      "provider_config_key": "gmail",
+      "provider_config_key": "google-mail",
       "icon_url": "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico"
     }
   ]
