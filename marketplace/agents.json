@@ -78,7 +78,7 @@
         "product-manager",
         "founder"
       ],
-      "source_path": "marketplace/global/skills/suprclaw-research",
+      "source_path": "marketplace/worker/skills/suprclaw-research",
       "extra_skill_paths": [
         "marketplace/global/skills/suprclaw-github-connector",
         "marketplace/global/skills/suprclaw-connector-tool-wrapper"
