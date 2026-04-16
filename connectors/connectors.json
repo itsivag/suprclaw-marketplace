@@ -4,13 +4,13 @@
       "provider": "github",
       "display_name": "GitHub",
       "provider_config_key": "github",
-      "icon_url": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+      "icon_url": "https://firebasestorage.googleapis.com/v0/b/suprclaw.firebasestorage.app/o/apps%2Fgithub-mark-logo.png?alt=media&token=1531e7c5-500c-481b-88e7-461ff8ba8a72"
     },
     {
       "provider": "gmail",
       "display_name": "Gmail",
       "provider_config_key": "google-mail",
-      "icon_url": "https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico"
+      "icon_url": "https://firebasestorage.googleapis.com/v0/b/suprclaw.firebasestorage.app/o/apps%2FGmail%20Logo.svg?alt=media&token=fb251d19-04ab-4000-97f5-93c79fe87c34"
     }
   ]
 }
