@@ -155,6 +155,49 @@
         "marketplace/global/skills/suprclaw-connector-tool-wrapper"
       ],
       "install_path": ".picoclaw/workspace-growth"
+    },
+    {
+      "id": "ops",
+      "name": "Ops Agent",
+      "description": "Keeps the business organized and moving through priorities, briefings, follow-ups, notes, decisions, deadlines, meeting summaries, and weekly updates.",
+      "session_key": "agent:ops:main",
+      "is_lead": false,
+      "capabilities": [
+        "Track tasks and priorities",
+        "Create daily and weekly briefings",
+        "Summarize what changed",
+        "Organize notes, docs, and decisions",
+        "Turn messy ideas into action lists",
+        "Identify follow-ups and open loops",
+        "Prepare meeting and call summaries",
+        "Monitor deadlines and attention-needed work",
+        "Draft business updates and status reports"
+      ],
+      "best_with": [
+        "research",
+        "growth",
+        "content-writer",
+        "seo"
+      ],
+      "source_path": "marketplace/ops/skills/daily-briefing",
+      "extra_skill_paths": [
+        "marketplace/ops/skills/weekly-business-update",
+        "marketplace/ops/skills/notes-to-action-list",
+        "marketplace/ops/skills/meeting-summary",
+        "marketplace/ops/skills/follow-up-monitor",
+        "marketplace/ops/skills/deadline-monitor",
+        "marketplace/ops/skills/decision-log",
+        "marketplace/ops/skills/change-summary",
+        "marketplace/ops/skills/docs-notes-organizer",
+        "marketplace/ops/skills/priority-planner",
+        "marketplace/global/skills/suprclaw-memory",
+        "marketplace/global/skills/suprclaw-gmail-connector",
+        "marketplace/global/skills/suprclaw-github-connector",
+        "marketplace/global/skills/suprclaw-connector-tool-wrapper",
+        "marketplace/global/skills/suprclaw-research",
+        "marketplace/global/skills/suprclaw-web-scrape"
+      ],
+      "install_path": ".picoclaw/workspace-ops"
     }
   ]
 }
