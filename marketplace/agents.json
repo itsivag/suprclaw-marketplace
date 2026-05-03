@@ -198,6 +198,49 @@
         "marketplace/global/skills/suprclaw-web-scrape"
       ],
       "install_path": ".picoclaw/workspace-ops"
+    },
+    {
+      "id": "sales",
+      "name": "Sales Agent",
+      "description": "Turns attention into conversations and customers through lead finding, inbound qualification, outreach, follow-ups, reply summaries, response tracking, objection handling, and DM/comment conversion.",
+      "session_key": "agent:sales:main",
+      "is_lead": false,
+      "capabilities": [
+        "Find potential leads",
+        "Qualify inbound leads",
+        "Draft outreach messages",
+        "Write follow-up messages",
+        "Summarize customer replies",
+        "Track who needs a response",
+        "Create objection-handling replies",
+        "Turn comments or DMs into sales conversations",
+        "Prepare discovery-call questions and next steps"
+      ],
+      "best_with": [
+        "growth",
+        "ops",
+        "research",
+        "content-writer"
+      ],
+      "source_path": "marketplace/sales/skills/founder-sales",
+      "extra_skill_paths": [
+        "marketplace/sales/skills/lead-finder",
+        "marketplace/sales/skills/inbound-lead-qualifier",
+        "marketplace/sales/skills/outreach-message-writer",
+        "marketplace/sales/skills/follow-up-writer",
+        "marketplace/sales/skills/reply-summarizer",
+        "marketplace/sales/skills/response-tracker",
+        "marketplace/sales/skills/objection-handler",
+        "marketplace/sales/skills/comment-dm-converter",
+        "marketplace/sales/skills/discovery-call-prep",
+        "marketplace/global/skills/suprclaw-memory",
+        "marketplace/global/skills/suprclaw-gmail-connector",
+        "marketplace/global/skills/suprclaw-github-connector",
+        "marketplace/global/skills/suprclaw-connector-tool-wrapper",
+        "marketplace/global/skills/suprclaw-research",
+        "marketplace/global/skills/suprclaw-web-scrape"
+      ],
+      "install_path": ".picoclaw/workspace-sales"
     }
   ]
 }
