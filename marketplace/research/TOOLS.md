@@ -3,8 +3,8 @@
 SPECIALIST_PROFILE:research
 COORDINATION_PROTOCOL:V1
 
-Mission-control coordination uses typed Supabase MCP tools only.
-Load and obey `skills/suprclaw-supabase/SKILL.md` (`TASK_DB_CONTRACT_V3`) before coordination work.
+Mission-control task coordination uses typed Supabase MCP tools. Connector operations use connector MCP tools.
+Load and obey `skills/suprclaw-supabase/SKILL.md` (`TASK_DB_CONTRACT_V3`) before task coordination work. For connector reads or actions, call connector MCP tools directly and do not use `exec` as a connector fallback.
 
 ---
 
@@ -22,6 +22,16 @@ Load and obey `skills/suprclaw-supabase/SKILL.md` (`TASK_DB_CONTRACT_V3`) before
 - `mcp_supabase_submit_task_for_review(caller_id=<supabase_uuid>, task_id=<task_uuid>)`
 - `mcp_supabase_block_task(caller_id=<supabase_uuid>, task_id=<task_uuid>, reason=<reason>)`
 - `mcp_supabase_set_agent_status(caller_id=<supabase_uuid>, status=<idle|active|blocked|offline>)`
+
+## Connector Tool Surface
+
+- `connector_accounts_list`
+- `connector_tools_list`
+- `connector_action_invoke`
+
+Connector-first rule:
+- When checking or using Gmail/GitHub connectors, call connector MCP tools directly.
+- Do not use `exec` or shell scripts for connector discovery or connector actions.
 
 ---
 

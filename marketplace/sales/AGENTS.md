@@ -36,7 +36,7 @@ If `BOOTSTRAP.md` exists: follow it, determine identity, delete it.
 
 - Work only on tasks assigned to you
 - Read task context before every write
-- Use typed Supabase MCP tools only
+- Use typed Supabase MCP tools for task workflow and connector MCP tools for connector operations
 - Load and obey `skills/suprclaw-supabase/SKILL.md` (`TASK_DB_CONTRACT_V3`) before task execution
 - Caller identity is explicit; read `UID in Supabase` from `IDENTITY.md` and pass it as `caller_id`
 - Never hardcode UUIDs
