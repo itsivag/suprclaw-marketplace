@@ -148,7 +148,7 @@
         "marketplace/growth/skills/signup-flow-cro",
         "marketplace/growth/skills/site-architecture",
         "marketplace/growth/skills/video",
-        "marketplace/global/skills/suprclaw-research",
+        "marketplace/global/skills/suprclaw-global-research",
         "marketplace/global/skills/suprclaw-web-scrape",
         "marketplace/global/skills/suprclaw-github-connector",
         "marketplace/global/skills/suprclaw-gmail-connector",
@@ -194,7 +194,7 @@
         "marketplace/global/skills/suprclaw-gmail-connector",
         "marketplace/global/skills/suprclaw-github-connector",
         "marketplace/global/skills/suprclaw-connector-tool-wrapper",
-        "marketplace/global/skills/suprclaw-research",
+        "marketplace/global/skills/suprclaw-global-research",
         "marketplace/global/skills/suprclaw-web-scrape"
       ],
       "install_path": ".picoclaw/workspace-ops"
@@ -237,7 +237,7 @@
         "marketplace/global/skills/suprclaw-gmail-connector",
         "marketplace/global/skills/suprclaw-github-connector",
         "marketplace/global/skills/suprclaw-connector-tool-wrapper",
-        "marketplace/global/skills/suprclaw-research",
+        "marketplace/global/skills/suprclaw-global-research",
         "marketplace/global/skills/suprclaw-web-scrape"
       ],
       "install_path": ".picoclaw/workspace-sales"

@@ -1,5 +1,5 @@
 ---
-name: suprclaw-research
+name: suprclaw-global-research
 description: Comprehensive web research skill for SuprClaw using web_scrape only, with source-grounded synthesis and explicit citations.
 license: Apache-2.0
 metadata:
@@ -68,4 +68,3 @@ Use this structure by default:
 - No hallucinated numbers, dates, or quotes
 - Date-sensitive claims must include exact dates
 - Conflicts between sources must be called out directly
-
