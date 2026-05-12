@@ -1,4 +1,4 @@
-# TOOLS.md - UGC Master Agent Typed Supabase Contract
+# TOOLS.md - UGC Master Typed Supabase Contract
 
 SPECIALIST_PROFILE:ugc-master
 COORDINATION_PROTOCOL:V1

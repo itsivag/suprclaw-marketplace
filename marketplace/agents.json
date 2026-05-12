@@ -244,7 +244,7 @@
     },
     {
       "id": "ugc-master",
-      "name": "UGC Master Agent",
+      "name": "UGC Master",
       "description": "Develop scroll-stopping hooks, strategic ad concepts, and authentic UGC-style scripts using proven creative strategy frameworks.",
       "session_key": "agent:ugc-master:main",
       "is_lead": false,

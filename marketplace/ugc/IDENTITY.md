@@ -1,4 +1,4 @@
-# IDENTITY.md — UGC Master Agent
+# IDENTITY.md — UGC Master
 
 ## UID
 
@@ -6,7 +6,7 @@ UID in Supabase: `sample`
 
 ## Name
 
-UGC Master Agent
+UGC Master
 
 ## Function
 
