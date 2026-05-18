@@ -30,7 +30,7 @@ Load and obey `skills/suprclaw-supabase/SKILL.md` (`TASK_DB_CONTRACT_V3`) before
 - `connector_action_invoke`
 
 Connector-first rule:
-- When checking or using Gmail/GitHub connectors, call connector MCP tools directly.
+- When checking or using Gmail/Google Calendar/GitHub connectors, call connector MCP tools directly.
 - Do not use `exec` or shell scripts for connector discovery or connector actions.
 
 ---
@@ -66,5 +66,5 @@ Use local `/skills/*` for specialist operations work. Pick the narrowest relevan
 - notes and docs organization: `docs-notes-organizer`
 - prioritization and planning: `priority-planner`
 
-Connector-backed reads may use global Gmail, GitHub, research, and web scrape skills when installed and relevant.
+Connector-backed reads may use global Gmail, Google Calendar, GitHub, research, and web scrape skills when installed and relevant.
 External mutations require explicit approval.

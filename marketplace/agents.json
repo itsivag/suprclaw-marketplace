@@ -152,6 +152,7 @@
         "marketplace/global/skills/suprclaw-web-scrape",
         "marketplace/global/skills/suprclaw-github-connector",
         "marketplace/global/skills/suprclaw-gmail-connector",
+        "marketplace/global/skills/suprclaw-google-calendar-connector",
         "marketplace/global/skills/suprclaw-connector-tool-wrapper"
       ],
       "install_path": ".picoclaw/workspace-growth"
@@ -192,6 +193,7 @@
         "marketplace/ops/skills/priority-planner",
         "marketplace/global/skills/suprclaw-memory",
         "marketplace/global/skills/suprclaw-gmail-connector",
+        "marketplace/global/skills/suprclaw-google-calendar-connector",
         "marketplace/global/skills/suprclaw-github-connector",
         "marketplace/global/skills/suprclaw-connector-tool-wrapper",
         "marketplace/global/skills/suprclaw-global-research",
@@ -235,6 +237,7 @@
         "marketplace/sales/skills/discovery-call-prep",
         "marketplace/global/skills/suprclaw-memory",
         "marketplace/global/skills/suprclaw-gmail-connector",
+        "marketplace/global/skills/suprclaw-google-calendar-connector",
         "marketplace/global/skills/suprclaw-github-connector",
         "marketplace/global/skills/suprclaw-connector-tool-wrapper",
         "marketplace/global/skills/suprclaw-global-research",

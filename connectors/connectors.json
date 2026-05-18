@@ -11,6 +11,12 @@
       "display_name": "Gmail",
       "provider_config_key": "google-mail",
       "icon_url": "https://firebasestorage.googleapis.com/v0/b/suprclaw.firebasestorage.app/o/apps%2FGmail%20Logo%20Icon%202026.png?alt=media&token=cee1b7da-c63a-41ef-9e3b-f82f132d0244"
+    },
+    {
+      "provider": "google-calendar",
+      "display_name": "Google Calendar",
+      "provider_config_key": "google-calendar",
+      "icon_url": "https://firebasestorage.googleapis.com/v0/b/suprclaw.firebasestorage.app/o/apps%2FGoogle_google_calendar_1.png?alt=media&token=d0358498-2354-4a88-9801-4ec7bd425782"
     }
   ]
 }
