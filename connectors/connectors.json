@@ -17,6 +17,12 @@
       "display_name": "Google Calendar",
       "provider_config_key": "google-calendar",
       "icon_url": "https://firebasestorage.googleapis.com/v0/b/suprclaw.firebasestorage.app/o/apps%2FGoogle_google_calendar_1.png?alt=media&token=d0358498-2354-4a88-9801-4ec7bd425782"
+    },
+    {
+      "provider": "google-search-console",
+      "display_name": "Google Search Console",
+      "provider_config_key": "google-search-console",
+      "icon_url": "https://firebasestorage.googleapis.com/v0/b/suprclaw.firebasestorage.app/o/apps%2FGoogle%20Search%20Console%20SuprClaw.png?alt=media&token=79b2f051-f204-48a5-b250-75c8bbcdf7dc"
     }
   ]
 }
